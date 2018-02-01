@@ -1,0 +1,12 @@
+---
+ vars:
+   - ec2_key: "AKIAIMBT5LJIR6TEYVQQ"
+   - ec2_seceret_key: "pwtxFJ0mKfHvh8RWFpDfU/iyBsXvJNj47uMgO7tA"
+   - ec2_keypair_name: "omera_aws"
+   - image: "ami-194cdc76" # RHEL 7.4
+#     tags: ['foo1', 'foo2']
+   - vpc_subnet_id: "subnet-86b8dced"
+   - group_id: 'sg-61020f0b' # Devops Project Security Group
+   - ssh_user: "ec2-user"
+   - region: "eu-central-1a" # Frankfurt
+   - instance_type: "t2.micro" # Free Tier

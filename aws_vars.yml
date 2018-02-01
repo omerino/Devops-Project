@@ -1,0 +1,28 @@
+- hosts: localhost
+  vars:
+    ec2_instances:
+      - name: "jenkins_server"
+        image: "ami-194cdc76" # RHEL 7.4
+#        tags: ['foo1', 'foo2']
+        group_id: 'sg-61020f0b' # Devops Project Security Group
+        ssh_user: "ec2-user"
+      - name: "build node" # slave server
+        image: "ami-194cdc76" # RHEL 7.4
+        tags: ['foo1', 'foo2']
+        ssh_user: "ec2-user"
+        group_id: 'sg-61020f0b' # Devops Project Security Group
+  tasks:
+    - name: Launch Instance
+      ec2:
+        group_id: "{{ item.group_id }}"
+        count: 1
+        instance_type: 'm3.medium'
+        image: '{{ item.image }}'
+        wait: true
+        region: 'us-east-1'
+        #keypair: '{{ keypair }}'
+        #        aws_access_key: "{{ aws_access_key|default(lookup('env', 'AWS_ACCESS_KEY')) }}"
+        #                aws_secret_key: "{{ aws_secret_key|default(lookup('env', 'AWS_SECRET_KEY')) }}"
+        #                        instance_tags: "{{ item.tags }}"
+        #                              register: ec2
+        #                                    with_items: ec2_instances
